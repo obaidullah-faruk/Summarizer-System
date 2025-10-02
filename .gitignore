@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / compiled files
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+*.egg-info/
+.eggs/
+
+# Distribution / packaging
+dist/
+build/
+*.egg
+*.whl
+
+# Virtual environment
+backend/.venv/
+backend/venv/
+backend/env/
+/bin/
+/include/
+/lib/
+/share/python-wheels/
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.bak
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs and databases
+*.log
+*.sqlite3
+*.db
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# PyInstaller
+*.spec
+build/
+dist/
+
+# uv lock file
+uv.lock
+
+# Miscellaneous
+.env
