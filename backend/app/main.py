@@ -1,8 +1,6 @@
 from contextlib import asynccontextmanager
-
-from fastapi import FastAPI, Body
-from transformers import pipeline
-import torch
+from fastapi import FastAPI
+from prometheus_fastapi_instrumentator import Instrumentator
 
 from app.core.config import get_settings
 from app.core.logging import logger
@@ -27,6 +25,9 @@ app = FastAPI(
 )
 
 app.include_router(api_router, prefix=settings.API_V1_prefix)
+
+# For prometheus
+Instrumentator().instrument(app).expose(app)
 
 
 @app.get("/health")

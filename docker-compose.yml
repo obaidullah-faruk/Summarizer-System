@@ -1,0 +1,49 @@
+services:
+  backend-server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fastapi-server
+    environment:
+      PYTHONUNBUFFERED: "1"
+    ports:
+      - "80:80"
+    volumes:
+      - ./backend/logs:/code/logs
+    restart: unless-stopped
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    depends_on:
+      - backend-server
+    restart: unless-stopped
+  
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+
+volumes:
+  prometheus_data:
+    driver: local
+  grafana-data:
+    driver: local
