@@ -3,7 +3,7 @@ This is a summarizer System used hugging face model for text summarization.
 
 ## Tech Stack
 
-**Server:** FastAPI\
+**Backend Server:** FastAPI\
 **Monitoring:** Prometheus, Grafana\
 **Containerization:** Docker
 
