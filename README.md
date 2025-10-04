@@ -4,8 +4,9 @@ This is a summarizer System used hugging face model for text summarization.
 ## Tech Stack
 
 **Backend Server:** FastAPI\
-**Monitoring:** Prometheus, Grafana\
-**Containerization:** Docker
+**Database:** Postgresql\
+**Monitoring:** Prometheus, Grafana, Promtail, Loki\
+**Containerization:** Docker\
 
 
 ## Acknowledgements

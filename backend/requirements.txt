@@ -10,4 +10,5 @@ torch
 transformers
 uvicorn
 uvloop
-
+sqlmodel
+psycopg[binary]

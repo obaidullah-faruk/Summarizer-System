@@ -5,13 +5,32 @@ services:
       dockerfile: Dockerfile
     container_name: fastapi-server
     environment:
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: faruk123
+      DATABASE_NAME: summarizer
+      DATABASE_HOST: database
+      DATABASE_PORT: "5432"
       PYTHONUNBUFFERED: "1"
     ports:
       - "80:80"
     volumes:
       - ./backend/logs:/code/logs
+    depends_on:
+      - database
     restart: unless-stopped
   
+  database:
+    image: postgres:15-alpine
+    container_name: database
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=faruk123
+      - POSTGRES_DB=summarizer
+
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -69,6 +88,8 @@ services:
 
 
 volumes:
+  postgres_data:
+    driver: local
   prometheus_data:
     driver: local
   grafana-data:
