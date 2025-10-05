@@ -6,7 +6,7 @@ This is a summarizer System used hugging face model for text summarization.
 **Backend Server:** FastAPI\
 **Database:** Postgresql\
 **Monitoring:** Prometheus, Grafana, Promtail, Loki\
-**Containerization:** Docker\
+**Containerization:** Docker
 
 
 ## Acknowledgements
@@ -18,6 +18,8 @@ This is a summarizer System used hugging face model for text summarization.
 
 - Text summarization
 
+## Instructions
+- create .env file from .env.example
 
 ## Installation
 

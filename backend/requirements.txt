@@ -12,3 +12,4 @@ uvicorn
 uvloop
 sqlmodel
 psycopg[binary]
+httpx
