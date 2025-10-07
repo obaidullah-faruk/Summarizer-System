@@ -13,3 +13,4 @@ uvloop
 sqlmodel
 psycopg[binary]
 httpx
+pwdlib[argon2]

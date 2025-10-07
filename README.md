@@ -17,6 +17,7 @@ This is a summarizer System used hugging face model for text summarization.
 ## Features
 
 - Text summarization
+- Authentication + Google authentication
 
 ## Instructions
 - create .env file from .env.example

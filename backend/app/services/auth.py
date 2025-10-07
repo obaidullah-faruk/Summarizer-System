@@ -31,3 +31,6 @@ async def get_user_infos_from_google_token_url(code: str):
         "status": bool(user_info),
         "user_infos": user_info
     }
+
+
+

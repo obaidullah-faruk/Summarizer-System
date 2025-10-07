@@ -47,9 +47,6 @@ app.include_router(api_router, prefix=settings.API_V1_prefix)
 Instrumentator().instrument(app).expose(app)
 
 
-@app.get("/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "version": settings.version
-    }
+@app.get("/")
+def root():
+    return {"message": "Summarizer API"}
