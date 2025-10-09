@@ -14,3 +14,9 @@ def create_user(email:str, password: str, session):
     session.add(user)
     session.commit()
     return user
+
+def get_password(email: str, session):
+    statement = select(User.password_hash, User.id).where(User.email==email)
+    results = session.exec(statement)
+    user_pass = results.first()
+    return user_pass

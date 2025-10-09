@@ -8,6 +8,11 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET: str
     GOOGLE_REDIRECT_URI: str
 
+    JWT_SECRET: str
+    JWT_ACCESS_TOKEN_VALIDITY: int
+    JWT_REFRESH_TOKEN_VALIDITY: int
+
+
     app_name: str = "Backend API"
     version: str = "1.0.0"
     API_V1_prefix: str = "/api/v1"

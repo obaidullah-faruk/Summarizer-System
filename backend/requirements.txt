@@ -14,3 +14,4 @@ sqlmodel
 psycopg[binary]
 httpx
 pwdlib[argon2]
+PyJWT
