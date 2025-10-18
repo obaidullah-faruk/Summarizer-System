@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     JWT_SECRET: str
     JWT_ACCESS_TOKEN_VALIDITY: int
     JWT_REFRESH_TOKEN_VALIDITY: int
-
+    JWT_ALGORITHM: str
 
     app_name: str = "Backend API"
     version: str = "1.0.0"
