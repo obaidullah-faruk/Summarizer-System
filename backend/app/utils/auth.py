@@ -3,15 +3,14 @@ import jwt
 import datetime
 from uuid import UUID
 from app.core.config import get_settings
-from fastapi import Depends, FastAPI, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm, HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jwt.exceptions import InvalidTokenError
-from typing import Annotated
 from app.crud.user import get_user
 from app.database.deps import SessionDep
+from app.core.logging import logger
 
 password_hash = PasswordHash.recommended()
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 bearer_scheme = HTTPBearer()
 
 
@@ -63,5 +62,7 @@ def get_current_user( session: SessionDep, token: HTTPAuthorizationCredentials =
         raise credentials_exception
     user = get_user(user_id=user_id, session=session)
     if user is None:
+        logger.error(f"Token verified Failed. Token: {token}")
         raise credentials_exception
+    logger.info(f"Token verified for user ID: {user_id}")
     return user.id
