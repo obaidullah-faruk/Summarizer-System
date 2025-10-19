@@ -13,8 +13,8 @@ from app.core.logging import logger
 password_hash = PasswordHash.recommended()
 bearer_scheme = HTTPBearer()
 
-
 settings = get_settings()
+
 
 def get_password_hash(password):
     return password_hash.hash(password)
@@ -28,26 +28,26 @@ def verify_password(password: str, hashed_password: str) -> bool:
 def create_access_token(user_id: UUID):
     access_payload = {
         'user_id': str(user_id),
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=settings.JWT_ACCESS_TOKEN_VALIDITY),  # Expires in 30 minutes
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=settings.JWT_ACCESS_TOKEN_VALIDITY),
         'iat': datetime.datetime.utcnow(),
         'type': 'access'
     }
-    access_token = jwt.encode(access_payload, settings.JWT_SECRET , algorithm=settings.JWT_ALGORITHM)
+    access_token = jwt.encode(access_payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
     return access_token
 
 
 def create_refresh_token(user_id: UUID):
     refresh_payload = {
         'user_id': str(user_id),
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=settings.JWT_REFRESH_TOKEN_VALIDITY),  # Expires in 30 minutes
+        'exp': datetime.datetime.utcnow() + datetime.timedelta(days=settings.JWT_REFRESH_TOKEN_VALIDITY),
         'iat': datetime.datetime.utcnow(),
         'type': 'refresh'
     }
-    refresh_token = jwt.encode(refresh_payload, settings.JWT_SECRET , algorithm=settings.JWT_ALGORITHM)
+    refresh_token = jwt.encode(refresh_payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
     return refresh_token
 
 
-def get_current_user( session: SessionDep, token: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
+def get_current_user(session: SessionDep, token: HTTPAuthorizationCredentials = Depends(bearer_scheme)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",

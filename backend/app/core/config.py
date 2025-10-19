@@ -3,7 +3,7 @@ from functools import lru_cache
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', case_sensitive=True,)
+    model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', case_sensitive=True, )
     GOOGLE_CLIENT_ID: str
     GOOGLE_CLIENT_SECRET: str
     GOOGLE_REDIRECT_URI: str
@@ -12,6 +12,11 @@ class Settings(BaseSettings):
     JWT_ACCESS_TOKEN_VALIDITY: int
     JWT_REFRESH_TOKEN_VALIDITY: int
     JWT_ALGORITHM: str
+    DB_USER: str
+    DB_PASS: str
+    DB_NAME: str
+    DB_HOST: str
+    DB_PORT: str
 
     app_name: str = "Backend API"
     version: str = "1.0.0"

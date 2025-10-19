@@ -1,5 +1,5 @@
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -7,7 +7,6 @@ from app.core.config import get_settings
 from app.core.logging import logger
 from app.api.v1.router import api_router
 from app.database.db import create_db_and_tables
-from app.database.deps import SessionDep
 
 settings = get_settings()
 

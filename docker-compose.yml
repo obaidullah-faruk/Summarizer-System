@@ -5,11 +5,6 @@ services:
       dockerfile: Dockerfile
     container_name: fastapi-server
     environment:
-      DATABASE_USER: postgres
-      DATABASE_PASSWORD: faruk123
-      DATABASE_NAME: summarizer
-      DATABASE_HOST: database
-      DATABASE_PORT: "5432"
       PYTHONUNBUFFERED: "1"
     ports:
       - "80:80"
@@ -32,7 +27,7 @@ services:
       - POSTGRES_DB=summarizer
 
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:main
     container_name: prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
@@ -47,7 +42,7 @@ services:
   
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:main
     container_name: grafana
     environment:
       - GF_SECURITY_ADMIN_USER=admin
@@ -63,7 +58,7 @@ services:
     restart: unless-stopped
   
   promtail:
-    image: grafana/promtail:latest
+    image: grafana/promtail:3.5
     container_name: promtail
     command: -config.file=/mnt/config/promtail-config.yaml
     volumes:
@@ -76,7 +71,7 @@ services:
     restart: unless-stopped
   
   loki:
-    image: grafana/loki:latest
+    image: grafana/loki:3.5
     container_name: loki
     command: -config.file=/mnt/config/loki-config.yaml
     ports:

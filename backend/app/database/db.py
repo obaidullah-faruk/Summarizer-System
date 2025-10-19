@@ -1,12 +1,14 @@
-import os
 from sqlmodel import SQLModel, create_engine, Session
 from typing import Generator
+from app.core.config import get_settings
 
-DB_USER = os.getenv("DATABASE_USER", "postgres")
-DB_PASS = os.getenv("DATABASE_PASSWORD", "faruk123")
-DB_NAME = os.getenv("DATABASE_NAME", "summarizer")
-DB_HOST = os.getenv("DATABASE_HOST", "database")
-DB_PORT = os.getenv("DATABASE_PORT", "5432")
+settings = get_settings()
+
+DB_USER = settings.DB_USER
+DB_PASS = settings.DB_PASS
+DB_NAME = settings.DB_NAME
+DB_HOST = settings.DB_HOST
+DB_PORT = settings.DB_PORT
 
 DATABASE_URL = f"postgresql+psycopg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 
