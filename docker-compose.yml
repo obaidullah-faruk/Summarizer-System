@@ -81,6 +81,14 @@ services:
       - loki_data:/loki
     restart: unless-stopped
 
+  redis:
+    image: redis:alpine3.22
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
 
 volumes:
   postgres_data:
@@ -92,4 +100,6 @@ volumes:
   loki_data:
     driver: local
   promtail_positions:
+    driver: local
+  redis_data:
     driver: local

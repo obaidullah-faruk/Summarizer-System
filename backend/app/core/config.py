@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     DB_NAME: str
     DB_HOST: str
     DB_PORT: str
+    REDIS_SERVER: str
+    REDIS_PORT: str
 
     app_name: str = "Backend API"
     version: str = "1.0.0"

@@ -7,16 +7,19 @@ from app.core.config import get_settings
 from app.core.logging import logger
 from app.api.v1.router import api_router
 from app.database.db import create_db_and_tables
+from app.core.redis import initialize_redis, close_redis
 
 settings = get_settings()
 
 
 @asynccontextmanager
-async def lifespan(the_app):
+async def lifespan(the_app: FastAPI):
     logger.info("Startup things")
+    await initialize_redis()
     create_db_and_tables()
     yield
     logger.info("Shutdown things")
+    await close_redis()
 
 
 app = FastAPI(
