@@ -20,6 +20,8 @@ async def summarize_plain_text(text: str = Body(..., media_type="text/plain"),
     summary_in_redis = await redis_client.get(hash)
     if summary_in_redis:
         logger.info(f"summary available in redis: {summary_in_redis}")
+        await redis_client.expire(hash, 3600)
+        logger.info(f"Update ttl for {hash} in redis")
         return SummarizationResponse(summary=summary_in_redis, original_length=len(text), summary_length=len(summary_in_redis))
     summary = text_ml_service.summarize(text)
     logger.info(f"summary from model: {summary}")
